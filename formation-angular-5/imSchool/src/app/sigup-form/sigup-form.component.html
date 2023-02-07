@@ -1,0 +1,35 @@
+<p>sigup-form works!</p>
+
+<form [formGroup]="form">
+    <div class="from-groupe">
+        <label for="username">Username</label>
+        <input
+            formControlName="username"
+            class="form-control"    
+            id="username" 
+            type="text">
+            <div class="alert alert-danger" 
+                *ngIf="username.touched && username.invalid">
+
+                <div *ngIf="username.errors?.['required']">  username est obligatoir </div>
+                <div *ngIf="username.errors?.['minlength']">  username doit avoir au mois {{username.errors?.['minlength'].requiredLength}} </div>
+                <div *ngIf="username.errors?.['cannotContainNumber']">  username  ne doit pas avoir des nombres  </div>
+
+            </div>
+    </div>
+    <div class="from-group">
+        <label for="password">Password</label>
+        <input
+            formControlName="password"
+             class="form-control" 
+             id="password" 
+             type="text">
+             <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+                passwordest obligatoir 
+
+            </div>
+    </div>
+    <div class="form-groupe">
+        <button class="btn btn-primary">Register</button>
+    </div>
+</form>

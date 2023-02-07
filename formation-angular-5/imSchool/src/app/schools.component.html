@@ -1,0 +1,18 @@
+<h1 [style.background-color]="isActive ?'gray':'black'" > {{title1}} {{ getTitle()}} :</h1>'
+<ul>
+    <li *ngFor="let school of schools">{{school}}</li>
+</ul>
+<img  [src]="image" [title]="titleImage"/>
+<img  src={{image}} title={{titleImage}}/>
+<br>
+<br><input  #email type="text" (keyup.enter)="onKeyUp(email.value)"/>
+<br>
+<br><input  [value]="email2" type="text" />
+
+<br>
+<br><input [(ngModel)]="email2" type="text" />
+
+
+<button (click)="onClick($event)"  type="button" class="btn btn-primary" [class.active]="isActive">bouton </button>
+
+
