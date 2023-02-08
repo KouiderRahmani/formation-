@@ -13,7 +13,7 @@
                 <textarea [(ngModel)]="post.body"   name="body" class="form-control"  id="Body" type="text"  placeholder="Body"></textarea>
             </div>
             <button (click)="createPost()" class="btn btn-primary" *ngIf="status">Add</button>
-            <button (click)="update()" class="btn btn-danger" *ngIf="!status">Delete</button>
+            <button (click)="update()" class="btn btn-danger" *ngIf="!status">Update </button>
         </form>
 
          <p>{{post|json}}</p>

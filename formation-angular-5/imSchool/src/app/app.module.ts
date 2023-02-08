@@ -13,6 +13,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SigupFormComponent } from './sigup-form/sigup-form.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsComponent } from './posts/posts.component';
+import { PostService } from './srvices/post.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { PostsComponent } from './posts/posts.component';
     HttpClientModule
     
   ],
-  providers: [SchoolsService,ProfilService],
+  providers: [SchoolsService,ProfilService ,PostService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

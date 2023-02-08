@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Injectable } from '@angular/core';
-import { HttpClient , HttpHeaders} from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { AppError } from '../common/app-error';
+import { BadInput } from '../common/bad-input';
+import { NotFoundError } from '../common/NotFoundError';
+import { PostService } from '../srvices/post.service';
+
 
 @Component({
   selector: 'app-posts',
@@ -19,33 +22,42 @@ export class PostsComponent implements OnInit {
       title: "",
       body:""
     }
-    httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-    };
+   
 
-  constructor(private http: HttpClient) {
-    this.http.get('https://jsonplaceholder.typicode.com/posts')
-      .subscribe(Response => {
-        this.posts = Response;
-        console.log(JSON.stringify(Response));
-
-      });
+  constructor( private  postService : PostService ) {
+   
   }
 
   ngOnInit()
   {
-    
+    this.getPosts();
   }
 
+getPosts(){
+  this.postService.getPosts()
+  .subscribe(Response => {
+    this.posts = Response;
+   // console.log(JSON.stringify(Response));
+
+  });
+   
+
+}
   createPost() {
 
-    this.http.post('https://jsonplaceholder.typicode.com/posts', this.post)
+    this.postService.createPost (this.post)
       .subscribe(Response => {
         this.post = Response;
 
         this.posts.unshift(this.post);
         this.intitPost();
-      });
+      },(error :AppError) =>{
+        if(error instanceof BadInput ) {
+          alert('merci de vérifier vous ');
+        }else { 
+        alert("ereur inattendu ") ; 
+        console.log(error);
+        }});
   }
 
   editPost(post: any) {
@@ -53,7 +65,7 @@ export class PostsComponent implements OnInit {
     this.status = false;
   }
   update() {
-    this.http.put('https://jsonplaceholder.typicode.com/posts/'+this.post.id, this.post)
+    this.postService.update (this.post)
      .subscribe(Response => {
       this.intitPost();
      });
@@ -63,15 +75,23 @@ export class PostsComponent implements OnInit {
 
  deletePost(post:any)
  {
-  this.http.delete('https://jsonplaceholder.typicode.com/posts/'+post.id ,this.httpOptions)
+  this.postService.deletePost(post.id)
   .subscribe(Response => {
 
           let index =this.posts.indexOf(post);        
           this.posts.splice(index,1);
-  });
+          console.log("++++++"+JSON.stringify(Response));
+  },(error :AppError) =>{
+      if(error instanceof NotFoundError ) {
+        alert('ce poste est deja suprimé ');
+      }else { 
+      alert("ereur inattendue ") ; 
+      console.log(error);
+    }});
 
 /*
-       this.http.delete('https://jsonplaceholder.typicode.com/posts/'+post.id ,this.httpOptions).pipe(
+ a revoir sur le site de angular
+this.http.delete('https://jsonplaceholder.typicode.com/posts/'+post.id ,this.httpOptions).pipe(
     tap(_ => this.log(`deleted hero id=${post.id}`));
   );*/
  }
