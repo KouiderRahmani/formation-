@@ -1,77 +1,74 @@
- <form #f="ngForm" (ngSubmit)="onSubmit(f)">
-    <div ngModelGroup="profile2">
-        <div class="form-group">
-            <label for="firstName">FirstName*</label>
-            <input 
-                required  
-                minlength="4" 
-                maxlength="10" 
-                pattern="[a-zA-Z]+" 
-                ngModel name="firstName" 
-                #firstName="ngModel"  
-                class="form-control" 
-                id="firstName" 
-                type="text">
-            <div class="alert alert-danger" 
-            *ngIf="firstName.touched && !firstName.valid">
-                <div 
-                    *ngIf="firstName.errors?.['required'] ">
-                        Ce champs est obligatoire 
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <div ngModelGroup="profile2">
+                <div class="form-group">
+                    <label for="firstName">FirstName*</label>
+                    <input required minlength="4" maxlength="10" pattern="[a-zA-Z]+" ngModel name="firstName"
+                        #firstName="ngModel" class="form-control" id="firstName" type="text">
+                    <div class="alert alert-danger" *ngIf="firstName.touched && !firstName.valid">
+                        <div *ngIf="firstName.errors?.['required'] ">
+                            Ce champs est obligatoire
+                        </div>
+                        <div *ngIf="firstName.errors?.['minlength'] ">
+                            Ce champ doit avoir au moins {{firstName.errors?.['minlength'].actualLength}} /
+                            {{firstName.errors?.['minlength'].requiredLength}} charas !!!!
+                        </div>
+                        <div *ngIf="firstName.errors?.['maxlength'] ">
+                            Ce champ doit avoir 10 charas maximum !!!!
+                        </div>
+                        <div *ngIf="firstName.errors?.['pattern'] ">
+                            Ce champ doit avoir des alphabies !!!!
+                        </div>
+                    </div>
                 </div>
-                <div 
-                    *ngIf="firstName.errors?.['minlength'] ">
-                        Ce champ doit avoir au moins {{firstName.errors?.['minlength'].actualLength}} / {{firstName.errors?.['minlength'].requiredLength}} charas !!!!
+
+                <div class="form-group">
+                    <label for="lastName">LastName</label>
+                    <input ngModel name="lasttName" #lasttName="ngModel" class="form-control" id="lastName" type="text">
                 </div>
-                <div 
-                    *ngIf="firstName.errors?.['maxlength'] "> 
-                        Ce champ doit avoir 10 charas maximum !!!!
-                </div>
-                <div 
-                    *ngIf="firstName.errors?.['pattern'] "> 
-                        Ce champ doit avoir des alphabies !!!!
-                </div>    
-             </div>   
-        </div>
-    
-        <div class="form-group">
-            <label for="lastName">LastName</label>
-            <input ngModel name="lasttName" #lasttName="ngModel" class="form-control" id="lastName" type="text">
-       </div>
+            </div>
+
+
+            <div class="form-group">
+                <label for="comment">Comment</label>
+                <textarea ngModel name="comment" #comment="ngModel" class="form-control" id="comment"
+                    type="text"></textarea>
+            </div>
+
+
+            <div class="form-group">
+                <label for="contactMethod">Méthode de contacte </label>
+                <select multiple class="form-control" id="contactMethod" name="contactMethod" ngModel>
+                    <option value="">Séléctionner une méthode de contacte </option>
+                    <option *ngFor="let method of contactMethods" [ngValue]="method">{{method.name}}</option>
+                </select>
+            </div>
+
+
+
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ngModel name="subscribe"> S'abboner
+                </label>
+            </div>
+            <div class="radio" *ngFor="let method of contactMethods">
+                <label for="">
+                    <input type="radio" name="contactMethod2" [value]="method.id " ngModel>
+                    {{method.name}}
+                </label>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary" [disabled]="!f.valid">Enregistrer</button>
+            </div>
+
+
+        </form>
+        <p> {{f.value |json}}</p>
     </div>
-
-   
-   <div class="form-group">
-        <label for="comment">Comment</label>
-        <textarea  ngModel name="comment" #comment="ngModel"  class="form-control" id="comment" type="text"></textarea>
-   </div>
-
-
-    <div class="form-group">
-        <label for="contactMethod">Méthode de contacte </label>
-        <select  multiple class="form-control" id ="contactMethod" name="contactMethod" ngModel >
-            <option value="">Séléctionner  une méthode  de contacte </option>
-            <option  *ngFor="let method of contactMethods" [ngValue]="method"  >{{method.name}}</option>
-        </select>
-    </div>
-    
-
-
-   <div class="checkbox">
-        <label >
-            <input type="checkbox" ngModel name="subscribe"> S'abboner
-        </label>
-    </div>
-    <div class="radio" *ngFor="let method of contactMethods">
-        <label for="">
-              <input type="radio" name ="contactMethod2" [value]="method.id " ngModel >
-              {{method.name}}
-        </label>
-    </div>
-   
-   <div class="form-group">
-    <button class="btn btn-primary" [disabled]="!f.valid">Enregistrer</button>
-   </div>
-   
-
-</form>
-<p> {{f.value |json}}</p>
+</div>
+id ={{id}} <br>
+username ={{username}}<br>
+type = {{type}}<br>
+page ={{page}}<br>

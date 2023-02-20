@@ -34,21 +34,21 @@ export class PostsComponent implements OnInit {
   }
 
 getPosts(){
-  this.postService.getPosts()
-  .subscribe(Response => {
-    this.posts = Response;
-   // console.log(JSON.stringify(Response));
-
+  this.postService.getAll()
+  .subscribe(response =>
+    this.posts = response,
+   error =>{
+        alert("erreur inattendu");
+        console.log(error);
   });
    
-
+//console.log(this.posts)
 }
   createPost() {
 
-    this.postService.createPost (this.post)
-      .subscribe(Response => {
-        this.post = Response;
-
+    this.postService.create (this.post)
+      .subscribe(newPost => {
+        this.post = newPost;
         this.posts.unshift(this.post);
         this.intitPost();
       },(error :AppError) =>{
@@ -66,21 +66,26 @@ getPosts(){
   }
   update() {
     this.postService.update (this.post)
-     .subscribe(Response => {
+     .subscribe( ()=> {
       this.intitPost();
-     });
+     },
+     error =>{
+      alert("erreur inattendu");
+      console.log(error);
+    });
     this.status = true;
+    
   }
 
 
  deletePost(post:any)
  {
-  this.postService.deletePost(post.id)
-  .subscribe(Response => {
+  this.postService.delete(post.id)
+  .subscribe(() => {
 
           let index =this.posts.indexOf(post);        
           this.posts.splice(index,1);
-          console.log("++++++"+JSON.stringify(Response));
+          
   },(error :AppError) =>{
       if(error instanceof NotFoundError ) {
         alert('ce poste est deja suprimé ');

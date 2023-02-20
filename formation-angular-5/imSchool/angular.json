@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "smartSchool": {
+    "imSchool": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/smart-school",
+            "outputPath": "dist/ims-school",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -60,10 +60,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "smartSchool:build:production"
+              "browserTarget": "imSchool:build:production"
             },
             "development": {
-              "browserTarget": "smartSchool:build:development"
+              "browserTarget": "imSchool:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -71,7 +71,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "smartSchool:build"
+            "browserTarget": "imSchool:build"
           }
         },
         "test": {
@@ -90,6 +90,30 @@
               "src/styles.css"
             ],
             "scripts": []
+          }
+        },
+        "ionic-cordova-serve": {
+          "builder": "@ionic/cordova-builders:cordova-serve",
+          "options": {
+            "cordovaBuildTarget": "imSchool:ionic-cordova-build",
+            "devServerTarget": "imSchool:serve"
+          },
+          "configurations": {
+            "production": {
+              "cordovaBuildTarget": "imSchool:ionic-cordova-build:production",
+              "devServerTarget": "imSchool:serve:production"
+            }
+          }
+        },
+        "ionic-cordova-build": {
+          "builder": "@ionic/cordova-builders:cordova-build",
+          "options": {
+            "browserTarget": "imSchool:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "imSchool:build:production"
+            }
           }
         }
       }

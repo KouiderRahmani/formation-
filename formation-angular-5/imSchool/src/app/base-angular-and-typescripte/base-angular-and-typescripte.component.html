@@ -1,0 +1,92 @@
+<h1>hanan takol banan</h1>
+
+
+
+
+<p>{{body |resume}}</p>
+<br>
+<p>{{body |resume:10}}</p>
+
+
+
+
+<div *ngIf=" coures.length > 0">
+    liste de mes cours 111
+</div>
+<div *ngIf=" coures.length == 0">
+    pas de cours111
+</div>
+<div *ngIf=" coures.length > 0 ; then  listCourses else noCourses ">
+</div>
+<ng-template #listCourses>
+    liste de mes cours 2
+</ng-template>
+
+<ng-template #noCourses>
+    pas de cours 2
+</ng-template>
+
+
+<div [hidden]="coures.length==0">
+    liste de mes cours 3
+</div>
+
+<div [hidden]="coures.length>0">
+    pas de cours 3
+</div>
+
+<ul class="nav nav-pills">
+    <li class="nav-item"><a class="nav-link " [class.active]="vieuCourse=='math'" (click)="vieuCourse='math'"> math</a>
+    </li>
+    <li class="nav-item"><a class="nav-link " [class.active]="vieuCourse=='physique'"
+            (click)="vieuCourse='physique'">physique </a></li>
+    <li class="nav-item"><a class="nav-link " [class.active]="vieuCourse=='informatique'"
+            (click)="vieuCourse='informatique'">informatique </a></li>
+</ul>
+<div [ngSwitch]="vieuCourse">
+    <div *ngSwitchCase="'math'">cours math ...</div>
+    <div *ngSwitchCase="'physique'">cours physique..</div>
+    <div *ngSwitchCase="'informatique'">cours informatique..</div>
+    <div *ngSwitchDefault>autre ....</div>
+</div>
+<div class="input-group">
+    <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" aria-label="" (click)="loudCourses()"> load </button>
+        <button class="btn btn-primary" (click)="addCourse()">add</button>
+    </span>
+
+</div>
+
+<ul>
+    <li *ngFor="let cour of couresObject ; trackBy:trackCourse ">
+        {{cour.id}} {{cour.title}}
+        <button class="btn btn-danger" (click)="remouve (cour)"> Delete</button>
+        <button class="btn btn-warning" (click)=" edit (cour)">Edit</button>
+    </li>
+</ul>
+<div class="col-md">
+    <span class="bi  "
+     [ngClass]="{
+             'bi-star': isSelected, 
+             'bi-star-fill': !isSelected
+    }"
+    [ngStyle]="{
+       'color' : isSelected ? 'red':'blue',
+       'font-size' :isSelected ?' 100px ':'200px'
+    }"
+
+    (click)="myFavorite()">
+    </span>
+</div>
+
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <profile></profile>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+        <sigup-form></sigup-form>
+    </div>
+</div>

@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { SchoolsService } from "./schools.service";
+import { SchoolsService } from "./srvices/schools.service";
 
 @Component({
     selector:'schools', // utliser ce nom pour l appler dans les  autres compenets app
