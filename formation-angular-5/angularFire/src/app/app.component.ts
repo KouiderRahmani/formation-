@@ -13,9 +13,11 @@ import { AngularFireDatabase } from 'angularfire2/database';
 export class AppComponent {
   title = 'angularFire';
   
-  courses: Observable<any[]>;
+  
   constructor(db: AngularFireDatabase) {
-    this.courses = db.list('COURES').valueChanges();
+     db.list('/COURES').valueChanges().subscribe(items => {
+      console.log(items)
+    });
    
   }
 }
