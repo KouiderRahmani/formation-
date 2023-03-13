@@ -1,0 +1,111 @@
+<div class="row m-3">
+    <div class="col-md-12">
+        <a href=""><i class="fa fa-arrow-circle-left " aria-hidden="true"></i> Back to dashbord</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title"><i class="fa fa-user" aria-hidden="true"></i>Edit Client</h4>
+              <form #formClient="ngForm" (ngSubmit)=" updateClient()">
+                <div class="form-group">
+                    <label for="">First Name</label>
+                    <input 
+                        type="text" 
+                        class="form-control"
+                        name="firstName"
+                        [(ngModel)]="client.firstName"
+                        #clientFirstName="ngModel"
+                        required
+                        minlength="3"
+                        [ngClass]="{'is-valide':clientFirstName.errors && clientFirstName.touched }"
+                        > 
+                        <div *ngIf="clientFirstName.invalid && (clientFirstName.dirty || clientFirstName.touched)"
+                            class="alert">
+                            <div *ngIf="clientFirstName.errors?.['required'] " class="invalid-feedback"  style="display: inline;">
+                                First name is required
+                            </div>
+                            <div *ngIf="clientFirstName.errors?.['minlength']"  class="invalid-feedback" style="display: inline;">
+                                Must be at least 3 characters 
+                            </div>
+                        </div>
+                        <label for="">Last Name</label>
+                        <input 
+                            type="text" 
+                            class="form-control"
+                            name="lastName"
+                            [(ngModel)]="client.lastName"
+                            #clientlastName="ngModel"
+                            required
+                            minlength="3"
+                            [ngClass]="{'is-valide':clientlastName.errors && clientlastName.touched }"
+                            > 
+                            <div *ngIf="clientlastName.invalid && (clientlastName.dirty || clientlastName.touched)"
+                                class="alert">
+                                <div *ngIf="clientlastName.errors?.['required'] " class="invalid-feedback"  style="display: inline;">
+                                    First name is required
+                                </div>
+                                <div *ngIf="clientlastName.errors?.['minlength']"  class="invalid-feedback" style="display: inline;">
+                                    Must be at least 3 characters 
+                                </div>
+                            </div>
+                            <label for="">Email</label>
+                            <input 
+                                type="email" 
+                                class="form-control"
+                                name="email"
+                                [(ngModel)]="client.email"
+                                #clientEmail="ngModel"
+                                [email]="true"
+ 
+                                [ngClass]="{'is-valide':clientEmail.errors && clientEmail.touched }"
+                                > 
+                                <div *ngIf="clientEmail.invalid && (clientEmail.dirty || clientEmail.touched)"
+                                    class="alert">
+                                    <div *ngIf="clientEmail.errors " class="invalid-feedback"  style="display: inline;">
+                                        mail not valide 
+                                    </div>
+                                </div>
+                                <label for="">Phone</label>
+                                <input 
+                                type="number" 
+                                class="form-control"
+                                name="phone"
+                                [(ngModel)]="client.phone"
+                                #clientPhone="ngModel"
+                                [ngClass]="{'is-valide':clientPhone.errors && clientPhone.touched }"
+                                > 
+                                <div *ngIf="clientPhone.invalid && (clientPhone.dirty ||clientPhone.touched)"
+                                    class="alert">
+                                    <div *ngIf="clientPhone.errors" class="invalid-feedback"  style="display: inline;">
+                                        Phone not valide
+                                    </div>
+                                 
+                                </div>
+                           
+                                <label for="">Balance</label>
+                                <input 
+                                type="number" 
+                                class="form-control"
+                                name="balance"
+                                [(ngModel)]="client.balance"
+                                #clientBalance="ngModel"
+                              
+                                [ngClass]="{'is-valide':clientBalance.errors && clientBalance.touched }"
+                                > 
+                                <div *ngIf="clientBalance.invalid && (clientBalance.dirty || clientBalance.touched)"
+                                    class="alert">
+                                    <div *ngIf="clientBalance.errors" class="invalid-feedback"  style="display: inline;">
+                                        balance not valide 
+                                    </div>
+                                    
+                                </div>
+                </div>
+                <br>
+                <button class="btn btn-danger btn-block col-md-12" [disabled]="!formClient.valid">Update</button>
+              </form>
+            </div>
+        </div>
+    </div>
+</div>

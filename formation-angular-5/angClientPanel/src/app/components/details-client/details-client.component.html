@@ -1,0 +1,51 @@
+<br>
+<div class="row">
+    <div class="col-md-6">
+        <a routerLink="/"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Go to dashBoard</a>
+    </div>
+    <div class="col-md-6 text-end">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <Button class="btn btn-danger me-md-1 " routerLink="/client/edit/{{id}}" >
+                <i class="fa fa-pencil me-md-1 " aria-hidden="true" ></i>Edit
+            </Button>
+            <Button class="btn btn-dark  " (click)="deleteClient(id)">
+                <i class="fa fa-trash me-md-1" aria-hidden="true"></i>Delete
+            </Button>
+
+        </div>
+
+    </div>
+
+</div>
+<br>
+<div class="card">
+    <div class="card-body">
+        <h4 class="cart-title">{{client?.firstName}} {{client?.lastName}}</h4>
+        <div class="row">
+            <div class="col-md-8">
+                <ul class="list-group ">
+                    <li class="list-group-item ">Id: <strong>{{id}} </strong></li>
+                    <li class="list-group-item ">Phone: <strong>{{client?.phone}} </strong></li>
+                    <li class="list-group-item">Email: <strong>{{client?.email}} </strong></li>
+                    <li class="list-group-item disabled">Phone: <strong>{{client?.phone}} </strong></li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-end">
+                <span class="h5">Balance </span> <Button class="btn btn-success" (click)="showBalance=!showBalance">
+                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                </Button>
+                <h4 [ngClass]="{'text-danger':showBalance,'text-success':!showBalance}">
+                    {{client?.balance|currency:"USD":"symbol"}}</h4>
+                <div *ngIf="showBalance">
+                    <form  #f="ngForm"> 
+                        <div class="input-group mb-3">
+                            <input type="number" class="form-control" name="balance" [(ngModel)]="client.balance">
+                            
+                            <button class="btn btn-warning" type="button" (click)="onSubmitForm()">Update</button>
+                          </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

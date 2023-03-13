@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-sm  navbar-light bg-primary navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" routerLink="/">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarID"
+            aria-controls="navbarID" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarID" *ngIf="isLogidIn">
+            <div class="navbar-nav">
+                <a class="nav-link " aria-current="page" routerLink="/">Dashbord</a>
+            </div>
+        </div>
+        <ul class="navbar-nav ml-auto" >
+            <li class="nav-item" *ngIf="!isLogidIn">
+                <a  class="nav-link" routerLink="/register">Register</a>
+            </li>
+            <li class="nav-item" *ngIf="!isLogidIn" >
+                <a   class="nav-link" routerLink="/login" >Login</a>
+            </li>
+            <li class="nav-item" *ngIf="isLogidIn" >
+                <a   class="nav-link" routerLink="/login" >{{userLoggedIn}}</a>
+            </li>
+            <li class="nav-item" *ngIf="isLogidIn" >
+                <a   class="nav-link"  (click)="onLogout() ">LogOut</a>
+            </li>
+        </ul>
+    </div>
+</nav>
